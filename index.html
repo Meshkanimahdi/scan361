@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#081124">
+<title>اسکن اتاق ۳۶۱، نسخهٔ آزمایشی</title>
+<style>
+@font-face{font-family:Vazirmatn;src:url(vazirmatn-400.woff2) format("woff2");font-weight:400}
+@font-face{font-family:Vazirmatn;src:url(vazirmatn-600.woff2) format("woff2");font-weight:600}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:#081124;color:#ECE2CE;font-family:Vazirmatn,Tahoma,sans-serif;overflow:hidden}
+button,input{font:inherit;color:inherit}
+.screen{position:fixed;inset:0;display:none;flex-direction:column}
+.screen.on{display:flex}
+#start,#result{padding:calc(20px + env(safe-area-inset-top)) 20px calc(20px + env(safe-area-inset-bottom));overflow:auto}
+h1{font-size:22px;font-weight:600;margin:0 0 6px}
+p{color:#B9B2A3;line-height:1.9;font-size:14.5px;margin:6px 0}
+ol{color:#CFC8BA;line-height:2;font-size:14.5px;padding-inline-start:20px;margin:10px 0}
+label{display:block;font-size:13.5px;color:#B9B2A3;margin:14px 0 6px}
+input[type=number]{width:100%;height:50px;border-radius:14px;border:1px solid rgba(236,226,206,.22);background:rgba(255,255,255,.06);padding:0 14px;font-size:17px;direction:ltr;text-align:center}
+.gold{height:54px;border:0;border-radius:16px;background:linear-gradient(180deg,#E3B66E,#CDA968);color:#081124;font-weight:600;font-size:16.5px;width:100%;margin-top:18px}
+.ghost{height:48px;border-radius:14px;border:1px solid rgba(236,226,206,.25);background:rgba(8,17,36,.6);padding:0 16px;font-size:14.5px}
+.err{color:#F09595;font-size:14px;min-height:22px;margin-top:10px}
+video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#cross{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px;pointer-events:none}
+#cross:before,#cross:after{content:"";position:absolute;background:#E3B66E;box-shadow:0 0 0 1px rgba(0,0,0,.5)}
+#cross:before{left:31px;top:0;width:2px;height:64px}#cross:after{top:31px;left:0;height:2px;width:64px}
+#cross i{position:absolute;left:26px;top:26px;width:12px;height:12px;border-radius:50%;border:2px solid #fff}
+.hud{position:absolute;left:12px;right:12px;display:flex;gap:8px;align-items:flex-start;pointer-events:none}
+.hud>*{pointer-events:auto}
+#top{top:calc(12px + env(safe-area-inset-top))}
+#bot{bottom:calc(14px + env(safe-area-inset-bottom));align-items:flex-end}
+.pill{background:rgba(8,17,36,.72);border:1px solid rgba(236,226,206,.2);border-radius:14px;padding:9px 13px;font-size:14px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+#read b{font-size:22px;font-weight:600;color:#fff;direction:ltr;display:inline-block}
+#read.bad b{color:#F09595}
+#mini{width:132px;height:132px;border-radius:14px;background:rgba(8,17,36,.72);border:1px solid rgba(236,226,206,.2)}
+#shoot{flex:1;height:64px;border:0;border-radius:20px;background:linear-gradient(180deg,#E3B66E,#CDA968);color:#081124;font-weight:600;font-size:18px}
+#shoot:active{transform:scale(.97)}
+.col{display:flex;flex-direction:column;gap:8px}
+.seg{display:flex;border-radius:12px;overflow:hidden;border:1px solid rgba(236,226,206,.25)}
+.seg button{border:0;background:rgba(8,17,36,.72);padding:9px 12px;font-size:13.5px}
+.seg button.on{background:#CDA968;color:#081124;font-weight:600}
+#plan{width:100%;aspect-ratio:1;background:#F6F5F2;border-radius:16px;margin:12px 0}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+td{padding:9px 4px;border-bottom:1px solid rgba(236,226,206,.12)}
+td.n{direction:ltr;text-align:left;font-weight:600;color:#fff}
+td input{width:92px;height:38px;border-radius:10px;border:1px solid rgba(236,226,206,.22);background:rgba(255,255,255,.06);text-align:center;direction:ltr}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.row>*{flex:1}
+.sum{font-size:16px;color:#fff;font-weight:600;margin:4px 0}
+.chk{display:flex;align-items:center;gap:8px;font-size:14.5px;color:#CFC8BA;margin:10px 0}
+.chk input{width:20px;height:20px}
+</style>
+</head>
+<body>
+<section id="start" class="screen on">
+  <h1>اسکن اتاق ۳۶۱</h1>
+  <p>نسخهٔ آزمایشی، جدا از اپ. با نشانه‌گیری گوشه‌های اتاق، پلان همان لحظه کشیده می‌شود.</p>
+  <ol>
+    <li>وسط اتاق بایست و تا آخر کار از جایت تکان نخور.</li>
+    <li>گوشی را در ارتفاع ثابت نگه دار و دور خود گوشی بچرخ.</li>
+    <li>علامت + را روی هر گوشه، جایی که دیوار به کف می‌رسد، بگذار و «ثبت گوشه» را بزن.</li>
+    <li>گوشه‌ها را به ترتیب، دور تا دور اتاق بگیر.</li>
+  </ol>
+  <label>ارتفاع گوشی از کف، سانتی‌متر</label>
+  <input id="hh" type="number" inputmode="numeric" value="150">
+  <label>ارتفاع سقف، سانتی‌متر (فقط برای گوشه‌ای که کفش پشت وسایل است)</label>
+  <input id="ch" type="number" inputmode="numeric" value="280">
+  <button class="gold" id="go">شروع اسکن</button>
+  <div class="err" id="err"></div>
+</section>
+
+<section id="scan" class="screen">
+  <video id="cam" playsinline muted autoplay></video>
+  <div id="cross"><i></i></div>
+  <div class="hud" id="top">
+    <div class="pill" id="read">فاصله <b id="dist">—</b> متر<br><span id="tip" style="font-size:12.5px;color:#B9B2A3">علامت را روی گوشهٔ کف بگذار</span></div>
+    <span style="flex:1"></span>
+    <div class="col" style="align-items:flex-end">
+      <div class="seg"><button id="mFloor" class="on">گوشهٔ کف</button><button id="mCeil">گوشهٔ سقف</button></div>
+      <div class="pill" id="count">۰ گوشه</div>
+    </div>
+  </div>
+  <div class="hud" id="bot">
+    <canvas id="mini" width="264" height="264"></canvas>
+    <div class="col" style="flex:1">
+      <div style="display:flex;gap:8px"><button class="ghost" id="undo" style="flex:1">برگشت</button><button class="ghost" id="done" style="flex:1">پایان اتاق</button></div>
+      <button id="shoot">ثبت گوشه</button>
+    </div>
+  </div>
+</section>
+
+<section id="result" class="screen">
+  <h1>پلان اتاق</h1>
+  <div class="sum" id="sum"></div>
+  <canvas id="plan" width="900" height="900"></canvas>
+  <label class="chk"><input type="checkbox" id="sq" checked>گونیا کردن دیوارها (زاویه‌های ۹۰ درجه)</label>
+  <p>اگر طول واقعی یکی از دیوارها را داری، کنار همان دیوار بنویس تا کل پلان با آن تنظیم شود.</p>
+  <table id="walls"></table>
+  <div class="row"><button class="ghost" id="again">اسکن دوباره</button><button class="ghost" id="copy">کپی داده‌ها</button></div>
+  <p id="note" style="font-size:13px"></p>
+</section>
+
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id), fa = (v) => String(v).replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[d]).replace(".", "٫");
+  const show = (id) => document.querySelectorAll(".screen").forEach((s) => s.classList.toggle("on", s.id === id));
+  let h = 1.5, ceil = 2.8, mode = "floor", pts = [], buf = [], cur = null, scale = 1, stream = null;
+
+  /* camera ray in the world frame (x east, y north, z up) from the device orientation angles */
+  function ray(a, b, g) {
+    const r = Math.PI / 180, cA = Math.cos(a * r), sA = Math.sin(a * r), cB = Math.cos(b * r), sB = Math.sin(b * r), cG = Math.cos(g * r), sG = Math.sin(g * r);
+    return [-(cG * sA * sB + cA * sG), -(sA * sG - cA * cG * sB), -cB * cG];
+  }
+  window.SCAN_RAY = ray;
+  function hit(v) {
+    const dz = mode === "floor" ? -v[2] : v[2], drop = mode === "floor" ? h : ceil - h;
+    if (dz < 0.05) return null;                      // looking above the horizon (or below it, for a ceiling corner)
+    return { x: v[0] / dz * drop, y: v[1] / dz * drop, d: Math.hypot(v[0], v[1]) / dz * drop, ang: Math.atan2(dz, Math.hypot(v[0], v[1])) * 180 / Math.PI };
+  }
+  function onOri(e) {
+    if (e.beta == null) return;
+    buf.push(ray(e.alpha || 0, e.beta, e.gamma || 0)); if (buf.length > 8) buf.shift();
+    const v = [0, 1, 2].map((k) => buf.reduce((s, q) => s + q[k], 0) / buf.length), L = Math.hypot(v[0], v[1], v[2]);
+    cur = hit(v.map((q) => q / L));
+    const far = !cur || cur.d > 12 || cur.ang < 7;
+    $("read").classList.toggle("bad", far);
+    $("dist").textContent = cur && cur.d < 30 ? fa(cur.d.toFixed(2)) : "—";
+    $("tip").textContent = !cur ? (mode === "floor" ? "دوربین را به سمت کف بگیر" : "دوربین را به سمت سقف بگیر") : far ? "این گوشه خیلی دور است، دقت کم می‌شود" : mode === "floor" ? "علامت را روی گوشهٔ کف بگذار" : "علامت را روی گوشهٔ سقف بگذار";
+    drawMini();
+  }
+
+  async function start() {
+    $("err").textContent = "";
+    h = (+$("hh").value || 150) / 100; ceil = (+$("ch").value || 280) / 100;
+    try {
+      if (typeof DeviceOrientationEvent === "undefined") throw new Error("این مرورگر سنسور جهت ندارد.");
+      if (DeviceOrientationEvent.requestPermission) { if (await DeviceOrientationEvent.requestPermission() !== "granted") throw new Error("اجازهٔ سنسور حرکت داده نشد."); }
+      if (!navigator.mediaDevices) throw new Error("دوربین فقط روی آدرس امن (https) باز می‌شود.");
+      stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: "environment" } }, audio: false });
+      $("cam").srcObject = stream;
+    } catch (e) { $("err").textContent = e.message || "دوربین یا سنسور در دسترس نیست."; return; }
+    addEventListener("deviceorientation", onOri);
+    pts = []; scale = 1; upd(); show("scan");
+    setTimeout(() => { if (!buf.length) $("tip").textContent = "سنسور جهت داده‌ای نمی‌دهد. در تنظیمات مرورگر، دسترسی حرکت را روشن کن."; }, 2500);
+  }
+  function upd() { $("count").textContent = fa(pts.length) + " گوشه"; drawMini(); }
+  function setMode(m) { mode = m; $("mFloor").classList.toggle("on", m === "floor"); $("mCeil").classList.toggle("on", m === "ceil"); }
+
+  /* drawing */
+  function fit(P, W, pad) {
+    const xs = P.map((p) => p.x), ys = P.map((p) => p.y), x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
+    const s = Math.min((W - 2 * pad) / Math.max(x1 - x0, .5), (W - 2 * pad) / Math.max(y1 - y0, .5));
+    return (p) => [W / 2 + (p.x - (x0 + x1) / 2) * s, W / 2 - (p.y - (y0 + y1) / 2) * s];
+  }
+  function drawMini() {
+    const c = $("mini"), g = c.getContext("2d"), W = c.width; g.clearRect(0, 0, W, W);
+    const P = pts.concat(cur && cur.d < 30 ? [cur] : []).concat([{ x: 0, y: 0 }]), T = fit(P, W, 26);
+    if (pts.length) { g.beginPath(); pts.forEach((p, i) => { const [x, y] = T(p); i ? g.lineTo(x, y) : g.moveTo(x, y); }); if (cur && cur.d < 30) { g.lineTo(...T(cur)); } g.strokeStyle = "#ECE2CE"; g.lineWidth = 4; g.stroke(); }
+    pts.forEach((p) => { g.beginPath(); g.arc(...T(p), 7, 0, 7); g.fillStyle = "#CDA968"; g.fill(); });
+    g.beginPath(); g.arc(...T({ x: 0, y: 0 }), 8, 0, 7); g.fillStyle = "#5DCAA5"; g.fill();
+  }
+  function squared(P) {
+    if (P.length < 4) return P;
+    const n = P.length, E = P.map((p, i) => ({ dx: P[(i + 1) % n].x - p.x, dy: P[(i + 1) % n].y - p.y }));
+    const big = E.reduce((a, b) => Math.hypot(a.dx, a.dy) > Math.hypot(b.dx, b.dy) ? a : b), t = -Math.atan2(big.dy, big.dx), c = Math.cos(t), s = Math.sin(t);
+    const R = P.map((p) => ({ x: p.x * c - p.y * s, y: p.x * s + p.y * c }));
+    const kind = R.map((p, i) => { const q = R[(i + 1) % n], a = Math.abs(Math.atan2(q.y - p.y, q.x - p.x) * 180 / Math.PI) % 180; return a < 25 || a > 155 ? "h" : Math.abs(a - 90) < 25 ? "v" : ""; });
+    return R.map((p, i) => {
+      const prev = (i + n - 1) % n, o = { x: p.x, y: p.y };
+      [[prev, R[prev]], [i, R[(i + 1) % n]]].forEach(([k, other]) => { if (kind[k] === "h") o.y = (p.y + other.y) / 2; if (kind[k] === "v") o.x = (p.x + other.x) / 2; });
+      return o;
+    });
+  }
+  const shape = () => ($("sq").checked ? squared(pts) : pts).map((p) => ({ x: p.x * scale, y: p.y * scale }));
+  function result() {
+    const P = shape(), n = P.length, c = $("plan"), g = c.getContext("2d"), W = c.width, T = fit(P, W, 110);
+    g.clearRect(0, 0, W, W); g.beginPath(); P.forEach((p, i) => { const [x, y] = T(p); i ? g.lineTo(x, y) : g.moveTo(x, y); }); g.closePath();
+    g.fillStyle = "#fff"; g.fill(); g.strokeStyle = "#262B29"; g.lineWidth = 14; g.lineJoin = "miter"; g.stroke();
+    let area = 0; const len = [];
+    P.forEach((p, i) => {
+      const q = P[(i + 1) % n], L = Math.hypot(q.x - p.x, q.y - p.y); len.push(L); area += p.x * q.y - q.x * p.y;
+      const [x1, y1] = T(p), [x2, y2] = T(q), mx = (x1 + x2) / 2, my = (y1 + y2) / 2, nx = -(y2 - y1), ny = x2 - x1, k = 46 / Math.hypot(nx, ny), cx = W / 2, cy = W / 2;
+      const out = (mx + nx * k - cx) ** 2 + (my + ny * k - cy) ** 2 > (mx - nx * k - cx) ** 2 + (my - ny * k - cy) ** 2 ? 1 : -1;
+      g.fillStyle = "#1F2321"; g.font = "600 34px Vazirmatn, sans-serif"; g.textAlign = "center"; g.textBaseline = "middle";
+      g.fillText(fa(L.toFixed(2)), mx + nx * k * out, my + ny * k * out);
+      g.fillStyle = "#CDA968"; g.beginPath(); g.arc(mx, my, 20, 0, 7); g.fill(); g.fillStyle = "#081124"; g.font = "600 24px Vazirmatn, sans-serif"; g.fillText(fa(i + 1), mx, my + 2);
+    });
+    area = Math.abs(area) / 2;
+    $("sum").textContent = `${fa(n)} دیوار · حدود ${fa(area.toFixed(1))} متر مربع`;
+    $("walls").innerHTML = len.map((L, i) => `<tr><td>دیوار ${fa(i + 1)}</td><td class="n">${L.toFixed(2)} m</td><td><input type="number" inputmode="decimal" step="0.01" placeholder="واقعی" data-i="${i}" data-l="${L}"></td></tr>`).join("");
+    $("note").textContent = scale !== 1 ? `پلان با ضریب ${fa(scale.toFixed(3))} تنظیم شده است.` : "";
+    return { walls: len.map((L) => +L.toFixed(3)), area: +area.toFixed(2) };
+  }
+  $("walls").addEventListener("change", (e) => { const t = e.target, real = +t.value; if (t.dataset.i && real > 0.2) { scale *= real / +t.dataset.l; result(); } });
+  $("sq").addEventListener("change", result);
+  $("go").addEventListener("click", start);
+  $("mFloor").addEventListener("click", () => setMode("floor")); $("mCeil").addEventListener("click", () => setMode("ceil"));
+  $("shoot").addEventListener("click", () => { if (!cur || cur.d > 30) return; pts.push({ x: cur.x, y: cur.y, mode }); if (navigator.vibrate) navigator.vibrate(30); setMode("floor"); upd(); });
+  $("undo").addEventListener("click", () => { pts.pop(); upd(); });
+  $("done").addEventListener("click", () => { if (pts.length < 3) { $("tip").textContent = "حداقل سه گوشه لازم است"; return; } result(); show("result"); });
+  $("again").addEventListener("click", () => { pts = []; scale = 1; upd(); show("scan"); });
+  $("copy").addEventListener("click", async () => {
+    const r = result(), data = JSON.stringify({ phone_height: h, ceiling: ceil, scale, squared: $("sq").checked, raw: pts.map((p) => ({ x: +p.x.toFixed(3), y: +p.y.toFixed(3), mode: p.mode })), corners: shape().map((p) => [+p.x.toFixed(3), +p.y.toFixed(3)]), walls: r.walls, area: r.area });
+    try { await navigator.clipboard.writeText(data); $("copy").textContent = "کپی شد"; } catch (e) { $("note").textContent = data; }
+  });
+})();
+</script>
+</body>
+</html>
